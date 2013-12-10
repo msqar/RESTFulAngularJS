@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Product Management</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="css/custom-style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body ng-app="productApp">
+	<div class="navbar navbar-inverse navbar-static-top">
+			<h1 class="navbar-brand">Header</h1>
+	</div>
+	<div class="container">		
+		<div class="page-header">
+			<h1>Products <small>Random product list</small></h1>
+		</div>
+		
+		<div class="page-body">
+			<div ng-view></div>	
+		</div>	
+	</div>
+	
+	<!-- Angular Libraries -->
+	<script type="text/javascript" src="angular/angular.min.js"></script>
+	<script type="text/javascript" src="angular/angular-route.js"></script>
+	<script type="text/javascript" src="angular/angular-local-storage.js"></script>
+	<!-- App related libraries -->
+	<script type="text/javascript" src="js/services/ProductServices.js"></script>
+	<script type="text/javascript" src="js/controllers/ProductControllers.js"></script>
+</body>
+</html>

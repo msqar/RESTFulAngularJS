@@ -1,0 +1,46 @@
+<div class="well container">	
+	<div class="well well-md">
+		<form class="form-horizontal">
+			<fieldset>
+				<!-- Form Name -->
+				<legend>Add a new product</legend>
+
+				<!-- Text input-->
+				<div class="control-group">
+					<label class="control-label" for="prod_name">Product name</label>
+					<div class="controls">
+						<input id="prod_name" name="prod_name" type="text"
+							placeholder="Product name" class="input-medium" required="required" ng-model="productName">
+
+					</div>
+				</div>
+
+				<!-- Textarea -->
+				<div class="control-group">
+					<label class="control-label" for="prod_description">Description</label>
+					<div class="controls">
+						<textarea cols="40" id="prod_description" name="prod_description" ng-model="productDescription"></textarea>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="control-group">
+					<label class="control-label" for="add_product_btn"></label>
+					<div class="controls">
+						<button id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()"
+							class="btn btn-success">Add product!</button>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+	<ul class="nav navbar">
+		<li ng-repeat="prod in prodList">
+			<div class="panel panel-primary">
+				<div class="panel-heading">{{prod.prodName | uppercase}}</div>
+				<div class="panel-body">{{prod.description}}</div>
+			</div>
+		</li>
+	</ul>
+</div>
