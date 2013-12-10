@@ -70,5 +70,20 @@ public class MessageRestService {
 		
 		return Response.status(200).entity(json).build();
 	}
+	
+	@GET
+	@Path("/getProductById/{id}")
+	public Response getProductById(@PathParam("id") String id) {
+		Product aProduct = new Product();
+		
+		ProductManager manager = new ProductManager();
+		System.out.println("The product with id: " + id + " will be gotten from the list");
+		aProduct = manager.getProductById(id);
+		Gson gson = new Gson();
+		String json = gson.toJson(aProduct);
+		
+		
+		return Response.status(200).entity(json).build();
+	}
 
 }

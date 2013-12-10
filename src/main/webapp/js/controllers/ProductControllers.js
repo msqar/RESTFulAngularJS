@@ -47,9 +47,5 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory) {
 	$scope.removeProduct = function(id) {
 		$scope.successMessage = productFactory.removeProductById(id);
 	}
-	
-	$scope.editProduct = function(id) {
-		
-	}
 });
 

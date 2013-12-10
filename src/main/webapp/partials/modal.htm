@@ -12,28 +12,28 @@
 					<div class="control-group">
 						<label class="control-label" for="prod_brand">Product Brand</label>
 						<input type="text" id="prod_brand" class="form-control"
-							ng-model="productBrand" required="required">
+							ng-model="model_productBrand" required="required" value="prod.prodBrand">
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="prod_name">Product Type</label> <input
 							type="text" id="prod_name" class="form-control"
-							ng-model="productName" required="required">
+							ng-model="model_productName" required="required" value="prod.prodName">
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="prod_price">Price</label>
 						<div class="input-group">
 							<span class="input-group-addon">$</span> <input type="text"
-								class="form-control" ng-model="productPrice"> <span
+								class="form-control" ng-model="model_productPrice" value="prod.price"> <span
 								class="input-group-addon">.00</span>
 						</div>
 					</div>	
 					<div class="control-group">
 						<label class="control-label" for="prod_description">Description</label>
-						<textarea id="prod_description" class="form-control" ng-model="productDescription" cols="70" rows="3"></textarea>
+						<textarea id="prod_description" class="form-control" ng-model="model_productDescription" cols="70" rows="3" >{{prod.description}}</textarea>
 					</div>
 					<div class="control-group" style="margin-top: 10px">
 						<div class="input-group">
-							<span class="input-group-addon"> <input type="checkbox" ng-model="productStock">
+							<span class="input-group-addon"> <input type="checkbox" ng-model="model_productStock">
 							</span> 
 							<span class="form-control no-cursor">Stock</span>
 						</div>
@@ -44,7 +44,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
-      <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
+      <button type="button" class="btn btn-primary" ng-click="ok()">Edit product</button>
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

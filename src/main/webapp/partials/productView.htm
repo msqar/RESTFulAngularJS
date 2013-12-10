@@ -38,7 +38,7 @@
 				<td>{{prod.price}} AR$</td>
 				<td ng-controller="ModalDemoCtrl">					
 					<div class="btn-group" role="toolbar">	
-						<div class="btn btn-default" ng-click="open()"><span title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
+						<div class="btn btn-default" ng-click="open(prod.id)"><span title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
 						<div class="btn btn-default" confirmed-click="removeProduct(prod.id)" ng-confirm-click="Do you want to remove this product?" ><span title="Remove" class="glyphicon glyphicon-remove btn-cursor"></span></div>
 					</div>
 				</td>

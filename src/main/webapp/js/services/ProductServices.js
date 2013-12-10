@@ -56,5 +56,18 @@ productApp.factory('productFactory', function($http, localStorageService) {
 		}
 	}
 	
+	factory.getProductById = function(prod_id) {
+		if(prod_id !== '') {
+			$http({
+				url: 'rest/message/getProductById/' + prod_id,
+				method: 'GET'
+			}).success(function(data, status) {
+				return;
+			});
+		}else {
+			alert("There was an error while passing the ID. Please refresh the page and try again");
+		}
+	}
+	
 	return factory;
 });

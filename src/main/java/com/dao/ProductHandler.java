@@ -13,6 +13,7 @@ public class ProductHandler {
 	private static final String QUERY_ALL_PRODUCTS = "SELECT * FROM products";
 	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price) VALUES (?,?,?,?,?)";
 	private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE id = ?" ;
+	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id = ?";
 	
 	public ArrayList<Product> getAllProducts(Connection connection) {
 		
@@ -73,6 +74,33 @@ public class ProductHandler {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}		
+	}
+
+	public Product getProdById(Connection connection, String id) {
+		Product aProd = new Product();
+		
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement(GET_PRODUCT_BY_ID);
+			
+			ps.setInt(1,Integer.valueOf(id));
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				aProd.setId(rs.getInt("id"));
+				aProd.setProdBrand(rs.getString("prod_brand"));
+				aProd.setProdName(rs.getString("prod_name"));
+				aProd.setDescription(rs.getString("description"));
+				aProd.setStock(rs.getString("stock"));
+				aProd.setPrice(String.valueOf(rs.getDouble("price")));
+			}
+						
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}	
+		
+		return aProd;
 	}
 	
 }

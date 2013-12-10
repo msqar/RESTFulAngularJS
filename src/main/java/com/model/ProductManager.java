@@ -47,4 +47,19 @@ public class ProductManager {
 		
 	}
 
+	public Product getProductById(String id) {
+		Product aProd = new Product();
+		
+		try {
+			DbConnection db = new DbConnection();
+			Connection connection = db.getConnection();
+			ProductHandler handler = new ProductHandler();
+			aProd = handler.getProdById(connection, id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return aProd;
+	}
+
 }
