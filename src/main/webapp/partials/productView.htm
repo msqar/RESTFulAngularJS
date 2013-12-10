@@ -30,15 +30,15 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="prod in prodList | filter: product_search">
-				<td>{{prod.id}}</td>
+				<td>{{$index+1}}</td>
 				<td>{{prod.prodBrand}}</td>
 				<td>{{prod.prodName}}</td>
 				<td>{{prod.description}}</td>
 				<td ng-style="{color: prod.stock_color}">{{prod.stock}}</td>
 				<td>{{prod.price}} AR$</td>
-				<td>					
+				<td ng-controller="ModalDemoCtrl">					
 					<div class="btn-group" role="toolbar">	
-						<div class="btn btn-default"><span ng-click="editProduct(prod.id)" title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
+						<div class="btn btn-default" ng-click="open()"><span title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
 						<div class="btn btn-default" confirmed-click="removeProduct(prod.id)" ng-confirm-click="Do you want to remove this product?" ><span title="Remove" class="glyphicon glyphicon-remove btn-cursor"></span></div>
 					</div>
 				</td>
@@ -79,13 +79,11 @@
 			<div class="col-md-3 col-md-5" style="margin-left: 20px">
 				<div class="control-group">
 					<label class="control-label" for="prod_description">Description</label>
-					<textarea id="prod_description" class="form-control"
-						ng-model="productDescription" cols="70" rows="3"></textarea>
+					<textarea id="prod_description" class="form-control" ng-model="productDescription" cols="70" rows="3"></textarea>
 				</div>
 				<div class="control-group" style="margin-top: 10px">
 					<div class="input-group">
-						<span class="input-group-addon"> <input type="checkbox"
-							ng-model="productStock">
+						<span class="input-group-addon"> <input type="checkbox" ng-model="productStock">
 						</span> 
 						<span class="form-control no-cursor">Stock</span>
 					</div>
@@ -94,14 +92,10 @@
 				<div class="control-group pull-right" style="margin-top: 50px">
 					<label class="control-label" for="add_product_btn"></label>
 					<div class="controls">
-						<button id="add_product_btn" name="add_product_btn"
-							ng-click="addNewProduct()" class="btn btn-success">Add
-							product!</button>
+						<button id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()" class="btn btn-success">Add product!</button>
 					</div>
 				</div>
 			</div>
 		</fieldset>
-	</form>
-</div>
-
+	</form>    
 </div>

@@ -7,7 +7,7 @@ productApp.config(function($routeProvider) {
 		.otherwise({redirectTo: '/'});
 });
 
-productApp.controller('prodCtrl', function($scope, productFactory) {
+productApp.controller('prodCtrl', function($scope,  $modal, productFactory) {
 	$scope.prodList = productFactory.getAllProducts();
 	
 	for (var poss = 0; poss < $scope.prodList.length; poss++) {
@@ -49,7 +49,7 @@ productApp.controller('prodCtrl', function($scope, productFactory) {
 	}
 	
 	$scope.editProduct = function(id) {
-		alert(id);
+		
 	}
 });
 

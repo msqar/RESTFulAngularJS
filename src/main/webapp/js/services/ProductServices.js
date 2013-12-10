@@ -1,4 +1,4 @@
-var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'angularSlideables']);
+var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'angularSlideables', 'ui.bootstrap']);
 
 productApp.factory('productFactory', function($http, localStorageService) {
 	var factory = {};
