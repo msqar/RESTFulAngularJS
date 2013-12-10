@@ -43,5 +43,13 @@ productApp.controller('prodCtrl', function($scope, productFactory) {
 			alert('Product name can\'t be empty!');
 		}
 	}
+	
+	$scope.removeProduct = function(id) {
+		alert(id);
+	}
+	
+	$scope.editProduct = function(id) {
+		alert(id);
+	}
 });
 

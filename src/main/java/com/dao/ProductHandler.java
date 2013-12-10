@@ -28,7 +28,7 @@ public class ProductHandler {
 				prod.setProdBrand(rs.getString("prod_brand"));
 				prod.setDescription(rs.getString("description"));
 				prod.setStock(rs.getString("stock"));
-				prod.setPrice(String.valueOf(rs.getDouble("precio")));
+				prod.setPrice(String.valueOf(rs.getDouble("price")));
 				
 				productList.add(prod);
 			}

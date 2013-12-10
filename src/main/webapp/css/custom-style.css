@@ -3,3 +3,12 @@
 .no-cursor input[disabled] { 
 	cursor: default !important;
 }
+
+.btn-cursor {
+	cursor: pointer;
+}
+
+.table-icon {
+	margin: 0 9px 0 0;
+	vertical-align:middle
+}

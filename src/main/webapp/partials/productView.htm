@@ -18,12 +18,15 @@
 	</div>
 	<table class="table table-hover">
 		<thead>
-			<th>#</th>
-			<th>Product Brand</th>
-			<th>Product Type</th>
-			<th>Description</th>
-			<th>Stock</th>
-			<th>Price</th>
+			<tr>
+				<th>#</th>
+				<th>Product Brand</th>
+				<th>Product Type</th>
+				<th>Description</th>
+				<th>Stock</th>
+				<th>Price</th>
+				<th>Edit</th>
+			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="prod in prodList | filter: product_search">
@@ -33,14 +36,20 @@
 				<td>{{prod.description}}</td>
 				<td ng-style="{color: prod.stock_color}">{{prod.stock}}</td>
 				<td>{{prod.price}} AR$</td>
+				<td>
+					<span ng-click="editProduct(prod.id)" title="Edit" class="glyphicon glyphicon-pencil btn-cursor table-icon"></span>
+					<span ng-click="removeProduct(prod.id)" title="Remove" class="glyphicon glyphicon-remove btn-cursor table-icon"></span>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<form class="form-horizontal">
+	<button class="btn btn-success" type="button" ng-hide="show" ng-show="!show" ng-click="show = !show">Add Product</button>
+
+	<form class="form-horizontal" ng-show="show">
 		<fieldset>
 			<!-- Form Name -->
-			<legend>Add a new product</legend>
+			<legend>Add a new product<span ng-click="show = !show" title="Close" class="glyphicon glyphicon-remove pull-right btn-cursor"></span></legend>
 
 			<!-- Row 1 -->
 			<div class="col-md-3 col-md-2 col-centered">
