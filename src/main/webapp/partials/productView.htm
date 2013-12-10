@@ -1,4 +1,21 @@
-<div class="well container">	
+<div class="well container">
+	<div class="well well-md" style="border: none !important">
+		<div class="row">
+			<div class="col-lg-8">
+			</div>
+			<!-- /.col-lg-6 -->
+			<div class="col-lg-4">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="product_search"> <span class="input-group-btn">
+						<span class="btn btn-default" type="button">Search</span>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
+		<!-- /.row -->
+	</div>
 	<table class="table table-hover">
 		<thead>
 			<th>#</th>
@@ -9,7 +26,7 @@
 			<th>Price</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="prod in prodList"> 
+			<tr ng-repeat="prod in prodList | filter: product_search">
 				<td>{{prod.id}}</td>
 				<td>{{prod.prodBrand}}</td>
 				<td>{{prod.prodName}}</td>
@@ -19,57 +36,61 @@
 			</tr>
 		</tbody>
 	</table>
-		
-	<div class="well well-md">
-		<form class="form-horizontal">
-			<fieldset>
-				<!-- Form Name -->
-				<legend>Add a new product</legend>
-				
-				<!-- Row 1 -->
-				<div class="col-md-3 col-md-2 col-centered">		
-					<div class="control-group">
-						<label class="control-label" for="prod_brand">Product Brand</label>
-						<input type="text" id="prod_brand" class="form-control" ng-model="productBrand" required="required">
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="prod_name">Product Type</label>
-						<input type="text" id="prod_name" class="form-control" ng-model="productName" required="required">
-					</div>				
-				    <div class="control-group input-small">
-						<label class="control-label" for="prod_price">Price</label>
-						<div class="input-group">
-						  <span class="input-group-addon">$</span>
-						  <input type="text" class="form-control" ng-model="productPrice">
-						  <span class="input-group-addon pull-center">.00</span>
-						</div>
-					</div>
-					
+
+	<form class="form-horizontal">
+		<fieldset>
+			<!-- Form Name -->
+			<legend>Add a new product</legend>
+
+			<!-- Row 1 -->
+			<div class="col-md-3 col-md-2 col-centered">
+				<div class="control-group">
+					<label class="control-label" for="prod_brand">Product Brand</label>
+					<input type="text" id="prod_brand" class="form-control"
+						ng-model="productBrand" required="required">
 				</div>
-				<!-- Row 2 -->
-				<div class="col-md-3 col-md-5" style="margin-left: 20px">		
-					<div class="control-group">
-						<label class="control-label" for="prod_description">Description</label>
-						<textarea id="prod_description" class="form-control" ng-model="productDescription" cols="70" rows="3"></textarea>
+				<div class="control-group">
+					<label class="control-label" for="prod_name">Product Type</label> <input
+						type="text" id="prod_name" class="form-control"
+						ng-model="productName" required="required">
+				</div>
+				<div class="control-group input-small">
+					<label class="control-label" for="prod_price">Price</label>
+					<div class="input-group">
+						<span class="input-group-addon">$</span> <input type="text"
+							class="form-control" ng-model="productPrice"> <span
+							class="input-group-addon pull-center">.00</span>
 					</div>
-					<div class="control-group" style="margin-top: 10px">
-						<div class="input-group">
-					      <span class="input-group-addon">
-					        <input type="checkbox" ng-model="productStock">
-					      </span>
-					      <input type="text" class="form-control no-cursor" disabled="disabled" value="Stock">
-					    </div>
+				</div>
+
+			</div>
+			<!-- Row 2 -->
+			<div class="col-md-3 col-md-5" style="margin-left: 20px">
+				<div class="control-group">
+					<label class="control-label" for="prod_description">Description</label>
+					<textarea id="prod_description" class="form-control"
+						ng-model="productDescription" cols="70" rows="3"></textarea>
+				</div>
+				<div class="control-group" style="margin-top: 10px">
+					<div class="input-group">
+						<span class="input-group-addon"> <input type="checkbox"
+							ng-model="productStock">
+						</span> <input type="text" class="form-control no-cursor"
+							disabled="disabled" value="Stock">
 					</div>
-					<!-- Button -->
-					<div class="control-group pull-right" style="margin-top: 50px">
-						<label class="control-label" for="add_product_btn"></label>
-						<div class="controls">
-							<button id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()" class="btn btn-success">Add product!</button>
-						</div>
+				</div>
+				<!-- Button -->
+				<div class="control-group pull-right" style="margin-top: 50px">
+					<label class="control-label" for="add_product_btn"></label>
+					<div class="controls">
+						<button id="add_product_btn" name="add_product_btn"
+							ng-click="addNewProduct()" class="btn btn-success">Add
+							product!</button>
 					</div>
-				</div>			
-			</fieldset>
-		</form>
-	</div>
-	
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
 </div>
