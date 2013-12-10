@@ -35,4 +35,16 @@ public class ProductManager {
 		}		
 	}
 
+	public void removeProdById(String id) {
+		try {
+			DbConnection db = new DbConnection();
+			Connection connection = db.getConnection();
+			ProductHandler handler = new ProductHandler();
+			handler.removeProdById(connection, id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+		
+	}
+
 }

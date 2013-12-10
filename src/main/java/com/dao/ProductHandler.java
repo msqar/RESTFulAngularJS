@@ -11,8 +11,9 @@ import com.pojo.Product;
 public class ProductHandler {
 	
 	private static final String QUERY_ALL_PRODUCTS = "SELECT * FROM products";
-	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, precio) VALUES (?,?,?,?,?)";
-
+	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price) VALUES (?,?,?,?,?)";
+	private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE id = ?" ;
+	
 	public ArrayList<Product> getAllProducts(Connection connection) {
 		
 		ArrayList<Product> productList = new ArrayList<Product>();
@@ -58,6 +59,20 @@ public class ProductHandler {
 			ex.printStackTrace();
 		}
 		
+	}
+
+	public void removeProdById(Connection connection, String id) {
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement(REMOVE_PRODUCT);
+			
+			ps.setInt(1,Integer.valueOf(id));
+			
+			ps.execute();
+						
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}		
 	}
 	
 }

@@ -36,9 +36,11 @@
 				<td>{{prod.description}}</td>
 				<td ng-style="{color: prod.stock_color}">{{prod.stock}}</td>
 				<td>{{prod.price}} AR$</td>
-				<td>
-					<span ng-click="editProduct(prod.id)" title="Edit" class="glyphicon glyphicon-pencil btn-cursor table-icon"></span>
-					<span ng-click="removeProduct(prod.id)" title="Remove" class="glyphicon glyphicon-remove btn-cursor table-icon"></span>
+				<td>					
+					<div class="btn-group" role="toolbar">	
+						<div class="btn btn-default"><span ng-click="editProduct(prod.id)" title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
+						<div class="btn btn-default" confirmed-click="removeProduct(prod.id)" ng-confirm-click="Do you want to remove this product?" ><span title="Remove" class="glyphicon glyphicon-remove btn-cursor"></span></div>
+					</div>
 				</td>
 			</tr>
 		</tbody>
