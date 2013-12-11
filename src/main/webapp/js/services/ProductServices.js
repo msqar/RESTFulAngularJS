@@ -1,25 +1,18 @@
-var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'angularSlideables', 'ui.bootstrap']);
+var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'ui.bootstrap', 'ngSanitize']);
 
-productApp.factory('productFactory', function($http, localStorageService, $q) {
+productApp.factory('productFactory', function($http, localStorageService) {
 	var factory = {};
-		
-	factory.init = function() {
-		$http.get('rest/message/getAllProducts')
-			.success(function(data) {
-				localStorageService.add('productData', data);
-			})
-			.error(function(status) {
-				localStorageService.add('productDataStatus', 'Error to retrieve data with Reason Code: ' + status);
-		});
+	
+	factory.getAllProducts = function(callbackSuccess, callbackError) {
+		$http({
+			url: 'rest/message/getAllProducts',
+			method: 'GET'
+		})
+		.success(callbackSuccess)
+		.error(callbackError);
 	}
 	
-	factory.init();
-	
-	factory.getAllProducts = function() {
-		return localStorageService.get('productData');
-	}
-	
-	factory.addSimpleProduct = function(productBrand, productName, prodDescription, productStock, productPrice) {
+	factory.addSimpleProduct = function(productBrand, productName, prodDescription, productStock, productPrice, callbackSuccess, callbackError) {
 		
 		if(productName !== '') {
 			var postData = {
@@ -34,23 +27,24 @@ productApp.factory('productFactory', function($http, localStorageService, $q) {
 				url: 'rest/message/addNewProduct',
 				method: 'POST',
 				data: postData
-			}).success(function(data, status){
-				return successMessage = data;
-			});			
+			})
+			.success(callbackSuccess)
+			.error(callbackError);
+		
 		}else{
 			alert("The product name can't be empty, please add a name");
 		}
 		
 	}
 	
-	factory.removeProductById = function(prod_id) {
+	factory.removeProductById = function(prod_id, callbackSuccess, callbackError) {
 		if(prod_id !== '') {
 			$http({
 				url: 'rest/message/removeProductById/' + prod_id,
 				method: 'DELETE'
-			}).success(function(data, status) {
-				return successMessage = data;
-			});
+			})
+			.success(callbackSuccess)
+			.error(callbackError);
 		}else {
 			alert("There was an error while passing the ID. Please refresh the page and try again");
 		}

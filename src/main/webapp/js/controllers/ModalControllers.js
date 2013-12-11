@@ -14,7 +14,7 @@ productApp.controller('ModalDemoCtrl', function ($scope, $modal) {
   };
 });
 
-productApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, productFactory, prodId) {	
+productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInstance, productFactory, prodId) {	
 
   // search product in the database
   productFactory.getProductById(prodId, function successCallback(data) {	  
@@ -47,8 +47,10 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, pro
 	  }
       
       productFactory.updateProductById(productObject, function successCallback(data) {
-    	  alert(data.response);
+//    	  alert(data.response);
     	  $modalInstance.dismiss('cancel');
+    	  //re-render the whole page
+    	  $route.reload();
       }, function errorCallback(data, status) {
     	  alert(data + ' Failed with error ' + status); 
       });    
