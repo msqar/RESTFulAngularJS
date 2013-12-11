@@ -1,6 +1,6 @@
 var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'angularSlideables', 'ui.bootstrap']);
 
-productApp.factory('productFactory', function($http, localStorageService) {
+productApp.factory('productFactory', function($http, localStorageService, $q) {
 	var factory = {};
 		
 	factory.init = function() {
@@ -56,17 +56,17 @@ productApp.factory('productFactory', function($http, localStorageService) {
 		}
 	}
 	
-	factory.getProductById = function(prod_id) {
+	factory.getProductById = function(prod_id, callbackData, callbackError) {		
 		if(prod_id !== '') {
 			$http({
 				url: 'rest/message/getProductById/' + prod_id,
 				method: 'GET'
-			}).success(function(data, status) {
-				return;
-			});
+			})
+			.success(callbackData)				
+			.error(callbackError);
 		}else {
 			alert("There was an error while passing the ID. Please refresh the page and try again");
-		}
+		}		
 	}
 	
 	return factory;

@@ -38,7 +38,7 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory) {
 		
 		if(productName !== '' || productBrand != '') {
 			$scope.successMessage = productFactory.addSimpleProduct(productBrand, productName, description, stock, price);
-			console.log($scope.successMessage);
+//			console.log($scope.successMessage);
 		}else{
 			alert('Product name and brand can\'t be empty!');
 		}
