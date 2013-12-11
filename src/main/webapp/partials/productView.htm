@@ -46,7 +46,9 @@
 		</tbody>
 	</table>
 
-	<button class="btn btn-success" type="button" ng-hide="show" ng-show="!show" ng-click="show = !show">Add Product</button>
+	<button class="btn btn-danger" type="button" ng-hide="show" ng-show="!show" ng-click="show = !show">
+		<i class="glyphicon glyphicon-plus"></i> Add Product
+	</button>
 
 	<form class="form-horizontal" ng-show="show">
 		<fieldset>
@@ -92,7 +94,9 @@
 				<div class="control-group pull-right" style="margin-top: 50px">
 					<label class="control-label" for="add_product_btn"></label>
 					<div class="controls">
-						<button id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()" class="btn btn-success">Add product!</button>
+						<button id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()" class="btn btn-success">
+							<i class="glyphicon glyphicon-plus"></i> Add product!
+						</button>
 					</div>
 				</div>
 			</div>
