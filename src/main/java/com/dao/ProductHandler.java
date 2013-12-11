@@ -14,6 +14,7 @@ public class ProductHandler {
 	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price) VALUES (?,?,?,?,?)";
 	private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE id = ?" ;
 	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id = ?";
+	private static final String UPDATE_PRODUCT_BY_ID = "UPDATE products SET prod_name = ?, prod_brand = ?, description = ?, stock = ?, price = ? WHERE id = ?";
 	
 	public ArrayList<Product> getAllProducts(Connection connection) {
 		
@@ -101,6 +102,25 @@ public class ProductHandler {
 		}	
 		
 		return aProd;
+	}
+
+	public void updateProdById(Connection connection, Product aProd) {
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement(UPDATE_PRODUCT_BY_ID);
+
+			ps.setString(1, aProd.getProdBrand());
+			ps.setString(2, aProd.getProdName());
+			ps.setString(3, aProd.getDescription());
+			ps.setString(4, aProd.getStock());
+			ps.setDouble(5, Double.valueOf(aProd.getPrice()));
+			ps.setInt(6, aProd.getId());
+			
+			ps.execute();			
+						
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}	
 	}
 	
 }

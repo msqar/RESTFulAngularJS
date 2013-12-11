@@ -17,22 +17,41 @@ productApp.controller('ModalDemoCtrl', function ($scope, $modal) {
 productApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, productFactory, prodId) {	
 
   // search product in the database
-  productFactory.getProductById(prodId, function successCallback(data) {
-      $scope.prod = data;
-      
-      $scope.model_productBrand = $scope.prod.prodBrand;
-      $scope.model_productName = $scope.prod.prodName;
-      $scope.model_productDescription = $scope.prod.description;
-      $scope.model_productPrice = $scope.prod.price;
-      if($scope.prod.stock === 'DISPONIBLE') {
+  productFactory.getProductById(prodId, function successCallback(data) {	  
+	  $scope.model_productBrand = data.prodBrand;
+      $scope.model_productName = data.prodName;
+      $scope.model_productDescription = data.description;
+      $scope.model_productPrice = data.price;
+      if(data.stock === 'DISPONIBLE') {
     	  $scope.model_productStock = true;
       }
       
    }, function errorCallback(data, status) {
       alert("An error occurred retrieving product. Please refresh the page & try again.");
    });
-  $scope.ok = function () {
-	  // do something
+  $scope.ok = function (model_productBrand, model_productName, model_productDescription, model_productPrice, model_productStock) {
+	  var prodStock = '';
+      if(model_productStock) {
+    	  prodStock = 'DISPONIBLE';
+      }else{
+    	  prodStock = 'SIN STOCK';
+      }      
+      
+      var productObject = {
+			  id : prodId,
+			  prodBrand : model_productBrand,
+			  prodName : model_productName,
+			  description : model_productDescription,
+			  price : model_productPrice,
+			  stock : prodStock
+	  }
+      
+      productFactory.updateProductById(productObject, function successCallback(data) {
+    	  alert(data.response);
+    	  $modalInstance.dismiss('cancel');
+      }, function errorCallback(data, status) {
+    	  alert(data + ' Failed with error ' + status); 
+      });    
   };
 
   $scope.cancel = function () {

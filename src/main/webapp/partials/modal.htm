@@ -29,7 +29,7 @@
 					</div>	
 					<div class="control-group">
 						<label class="control-label" for="prod_description">Description</label>
-						<textarea id="prod_description" class="form-control" ng-model="model_productDescription" cols="70" rows="3" >{{prod.description}}</textarea>
+						<textarea id="prod_description" class="form-control" ng-model="model_productDescription" cols="70" rows="3">{{prod.description}}</textarea>
 					</div>
 					<div class="control-group" style="margin-top: 10px">
 						<div class="input-group">
@@ -44,7 +44,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
-      <button type="button" class="btn btn-primary" ng-click="ok()">Edit product</button>
+      <button type="button" class="btn btn-primary" ng-click="ok(model_productBrand, model_productName, model_productDescription, model_productPrice, model_productStock)">Edit product</button>
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

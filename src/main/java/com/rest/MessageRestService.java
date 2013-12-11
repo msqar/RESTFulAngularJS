@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
@@ -54,7 +55,7 @@ public class MessageRestService {
 		ProductManager manager = new ProductManager();
 		System.out.println("This is the product being added: " + prod.getProdName() + " : " + prod.getDescription());
 		manager.addNewProduct(prod);
-		String json = "{ \"data\" : \"Product has been successfully saved.\"";
+		String json = "{ \"data\" : \"Product has been successfully saved.\"}";
 		
 		return Response.status(200).entity(json).build();
 	}
@@ -66,7 +67,7 @@ public class MessageRestService {
 		ProductManager manager = new ProductManager();
 		System.out.println("The product with id: " + id + " will be removed from the list");
 		manager.removeProdById(id);
-		String json = "{ \"data\" : \"Product has been successfully removed.\"";
+		String json = "{ \"data\" : \"Product has been successfully removed.\"}";
 		
 		return Response.status(200).entity(json).build();
 	}
@@ -83,6 +84,20 @@ public class MessageRestService {
 		String json = gson.toJson(aProduct);
 		
 		
+		return Response.status(200).entity(json).build();
+	}
+	
+	@PUT
+	@Path("/updateProductById")
+	public Response updateProductById(String jsonProduct) {
+		
+		Gson gson = new Gson();
+		Product aProd = gson.fromJson(jsonProduct, Product.class);
+		ProductManager manager = new ProductManager();
+		System.out.println("The product with id: " + aProd.getId() + " will be updated");
+		manager.updateProductById(aProd);	
+		
+		String json = "{ \"response\" : \"Product has been successfully updated.\"}";
 		return Response.status(200).entity(json).build();
 	}
 

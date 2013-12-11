@@ -1,3 +1,5 @@
+textarea { resize:vertical; }
+
 .input-small input { width: 100px !important }
 
 .no-cursor input[disabled] { 

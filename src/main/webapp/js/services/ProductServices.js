@@ -69,5 +69,15 @@ productApp.factory('productFactory', function($http, localStorageService, $q) {
 		}		
 	}
 	
+	factory.updateProductById = function(prodObj, callbackData, callbackError) {
+		$http({
+			url: 'rest/message/updateProductById',
+			method: 'PUT',
+			data: prodObj,
+		})
+		.success(callbackData)
+		.error(callbackError);
+	}
+	
 	return factory;
 });

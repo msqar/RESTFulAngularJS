@@ -62,4 +62,15 @@ public class ProductManager {
 		return aProd;
 	}
 
+	public void updateProductById(Product aProd) {
+		try {
+			DbConnection db = new DbConnection();
+			Connection connection = db.getConnection();
+			ProductHandler handler = new ProductHandler();
+			handler.updateProdById(connection, aProd);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
 }
