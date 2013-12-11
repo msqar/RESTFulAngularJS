@@ -55,7 +55,7 @@ public class MessageRestService {
 		ProductManager manager = new ProductManager();
 		System.out.println("This is the product being added: " + prod.getProdName() + " : " + prod.getDescription());
 		manager.addNewProduct(prod);
-		String json = "{ \"data\" : \"Product has been successfully saved.\"}";
+		String json = "{ \"response\" : \"Product has been successfully saved.\"}";
 		
 		return Response.status(200).entity(json).build();
 	}
@@ -67,7 +67,7 @@ public class MessageRestService {
 		ProductManager manager = new ProductManager();
 		System.out.println("The product with id: " + id + " will be removed from the list");
 		manager.removeProdById(id);
-		String json = "{ \"data\" : \"Product has been successfully removed.\"}";
+		String json = "{ \"response\" : \"Product has been successfully removed.\"}";
 		
 		return Response.status(200).entity(json).build();
 	}
