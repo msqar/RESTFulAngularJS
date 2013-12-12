@@ -1,4 +1,4 @@
-var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'ui.bootstrap', 'ngSanitize']);
+var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 'ui.bootstrap', 'ngSanitize', 'angular-flash.service', 'angular-flash.flash-alert-directive']);
 
 productApp.factory('productFactory', function($http, localStorageService) {
 	var factory = {};

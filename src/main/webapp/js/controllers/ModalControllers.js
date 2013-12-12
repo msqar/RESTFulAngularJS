@@ -47,7 +47,7 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
 	  }
       
       productFactory.updateProductById(productObject, function successCallback(data) {
-//    	  alert(data.response);
+
     	  $modalInstance.dismiss('cancel');
     	  //re-render the whole page
     	  $route.reload();

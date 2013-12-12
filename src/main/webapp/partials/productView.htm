@@ -45,23 +45,16 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<div flash-alert active-class="in alert" class="fade">
+	    <strong class="alert-heading">{{alert.heading}}</strong>
+	    <span class="alert-message">{{flash.message}}</span>
+	</div>
 
 	<button class="btn btn-danger" type="button" ng-hide="show" ng-show="!show" ng-click="show = !show">
 		<i class="glyphicon glyphicon-plus"></i> Add Product
 	</button>
-	
-	<div ng-bind-html="notification">
-		<!-- <notification type="alert.type" message="alert.msg"></notification>-->
-	</div>
 
-	<!-- 
-	<div class="alert alert-warning fade in" ng-model="errorAlert" ng-show="errorAlert">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{alertErrorData}}
-	</div>
-	<div class="alert alert-success fade in" ng-model="successAlert" ng-show="successAlert">
-		<button type="button" class="close" aria-hidden="true">&times;</button>{{alertSuccessData}}
-	</div>
-	 -->
 	<form class="form-horizontal" ng-show="show">
 		<fieldset>
 			<!-- Form Name -->
