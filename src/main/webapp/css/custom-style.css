@@ -22,3 +22,26 @@ textarea { resize:vertical; }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #FFF8DC;
 }
+
+/* ng-animation properties */
+
+.animation.ng-enter,
+.animation.ng-leave{
+  -webkit-transition: 1s;
+}
+
+.animation.ng-enter {
+  opacity: 0;
+}
+
+.animation.ng-leave {
+  opacity: 1;
+}
+
+.animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.animation.ng-leave.ng-leave-active {
+  opacity: 0;
+}

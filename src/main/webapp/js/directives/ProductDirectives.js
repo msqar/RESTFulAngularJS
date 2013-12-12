@@ -13,23 +13,3 @@ productApp.directive('ngConfirmClick', [ function() {
 	};
 } ]);
 
-
-productApp.directive('notification', function($timeout) {
-	return {
-		restrict : 'E',
-		replace : false,
-		scope : {
-			type: "&",
-			message: "&"
-		},
-		//template : '<alert class="alert alert-success alert-dismissable" type="type">message</alert>',
-		template: '<div class="alert {{type}} alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{message}}</div>',
-		link : function(scope, element, attrs) {
-			console.log(attrs);
-			$timeout(function() {
-				element.hide();
-			}, 3000);
-		}
-	}
-});
-
