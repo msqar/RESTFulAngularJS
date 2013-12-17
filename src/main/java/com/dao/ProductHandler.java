@@ -11,10 +11,10 @@ import com.pojo.Product;
 public class ProductHandler {
 	
 	private static final String QUERY_ALL_PRODUCTS = "SELECT * FROM products";
-	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price) VALUES (?,?,?,?,?)";
+	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price, currency) VALUES (?,?,?,?,?,?)";
 	private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE id = ?" ;
 	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id = ?";
-	private static final String UPDATE_PRODUCT_BY_ID = "UPDATE products SET prod_name = ?, prod_brand = ?, description = ?, stock = ?, price = ? WHERE id = ?";
+	private static final String UPDATE_PRODUCT_BY_ID = "UPDATE products SET prod_brand = ?, prod_name = ?, description = ?, stock = ?, price = ?, currency = ? WHERE id = ?";
 	
 	public ArrayList<Product> getAllProducts(Connection connection) {
 		
@@ -32,6 +32,7 @@ public class ProductHandler {
 				prod.setDescription(rs.getString("description"));
 				prod.setStock(rs.getString("stock"));
 				prod.setPrice(String.valueOf(rs.getDouble("price")));
+				prod.setCurrency(rs.getString("currency"));
 				
 				productList.add(prod);
 			}
@@ -54,6 +55,7 @@ public class ProductHandler {
 			ps.setString(3, prod.getDescription());
 			ps.setString(4, prod.getStock());
 			ps.setDouble(5, Double.valueOf(prod.getPrice()));
+			ps.setString(6, prod.getCurrency());
 			
 			ps.execute();
 						
@@ -95,6 +97,7 @@ public class ProductHandler {
 				aProd.setDescription(rs.getString("description"));
 				aProd.setStock(rs.getString("stock"));
 				aProd.setPrice(String.valueOf(rs.getDouble("price")));
+				aProd.setCurrency(rs.getString("currency"));
 			}
 						
 		}catch(SQLException ex) {
@@ -115,6 +118,7 @@ public class ProductHandler {
 			ps.setString(4, aProd.getStock());
 			ps.setDouble(5, Double.valueOf(aProd.getPrice()));
 			ps.setInt(6, aProd.getId());
+			ps.setString(7, aProd.getCurrency());
 			
 			ps.execute();			
 						

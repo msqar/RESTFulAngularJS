@@ -7,9 +7,11 @@ productApp.config(function($routeProvider) {
 		.otherwise({redirectTo: '/'});
 });
 
-productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flash) {
+productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flash, localStorageService) {
 	$scope.prodList = {};
 	$scope.alert = {};
+	$scope.prodCurrencies = localStorageService.get('productCurrency');
+	$scope.name = 'this is a test';
 		
 	var callProds = function() {
 		productFactory.getAllProducts(function successCallBack(data){
@@ -36,7 +38,8 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flas
 		var productName = $scope.productName;
 		var description = $scope.productDescription;
 		var stock = '';
-		var price = $scope.productPrice + '.00';
+		var price = $scope.productPrice + '.00';		
+		var currency = $scope.selectedCurrency;
 
 		if($scope.productStock) {
 			stock = 'DISPONIBLE';
@@ -44,8 +47,8 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flas
 			stock = 'SIN STOCK';
 		}
 		
-		if(productName !== '' || productBrand != '') {
-			productFactory.addSimpleProduct(productBrand, productName, description, stock, price, function callbackSuccess(data) {
+		if(typeof (productName) !== 'undefined' || productName !== null || typeof (productBrand) !== 'undefined' || productBrand !== null) {
+			productFactory.addSimpleProduct(productBrand, productName, description, stock, price, currency, function callbackSuccess(data) {
 				$scope.alert = {
 					heading: "Success!"
 				}

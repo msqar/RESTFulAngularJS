@@ -3,7 +3,7 @@ productApp.controller('ModalDemoCtrl', function ($scope, $modal) {
   $scope.open = function (id) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'partials/modal.htm',
+      templateUrl: 'modals/updateProductModal.htm',
       controller: 'ModalInstanceCtrl',
       resolve: {
     	  prodId : function () {
@@ -14,14 +14,17 @@ productApp.controller('ModalDemoCtrl', function ($scope, $modal) {
   };
 });
 
-productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInstance, productFactory, prodId) {	
+productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInstance, productFactory, prodId, localStorageService) {	
 
+  $scope.prodCurrencies = localStorageService.get('productCurrency');	
+	
   // search product in the database
   productFactory.getProductById(prodId, function successCallback(data) {	  
-	  $scope.model_productBrand = data.prodBrand;
-      $scope.model_productName = data.prodName;
-      $scope.model_productDescription = data.description;
-      $scope.model_productPrice = data.price;
+	  $scope.modal_productBrand = data.prodBrand;
+      $scope.modal_productName = data.prodName;
+      $scope.modal_productDescription = data.description;
+      $scope.modal_productPrice = data.price;
+      $scope.modal_selectedCurrency = data.currency;
       if(data.stock === 'DISPONIBLE') {
     	  $scope.model_productStock = true;
       }
@@ -29,7 +32,7 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
    }, function errorCallback(data, status) {
       alert("An error occurred retrieving product. Please refresh the page & try again.");
    });
-  $scope.ok = function (model_productBrand, model_productName, model_productDescription, model_productPrice, model_productStock) {
+  $scope.ok = function (modal_productBrand, modal_productName, modal_productDescription, modal_productPrice, modal_productStock, modal_productCurrency) {
 	  var prodStock = '';
       if(model_productStock) {
     	  prodStock = 'DISPONIBLE';
@@ -39,11 +42,12 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
       
       var productObject = {
 			  id : prodId,
-			  prodBrand : model_productBrand,
-			  prodName : model_productName,
-			  description : model_productDescription,
-			  price : model_productPrice,
-			  stock : prodStock
+			  prodBrand : modal_productBrand,
+			  prodName : modal_productName,
+			  description : modal_productDescription,
+			  price : modal_productPrice,
+			  stock : prodStock,
+			  currency : modal_productCurrency
 	  }
       
       productFactory.updateProductById(productObject, function successCallback(data) {

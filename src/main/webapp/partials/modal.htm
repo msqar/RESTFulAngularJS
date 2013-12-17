@@ -12,28 +12,33 @@
 					<div class="control-group">
 						<label class="control-label" for="prod_brand">Product Brand</label>
 						<input type="text" id="prod_brand" class="form-control"
-							ng-model="model_productBrand" required="required" value="prod.prodBrand">
+							ng-model="modal_productBrand" required="required" value="prod.prodBrand">
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="prod_name">Product Type</label> <input
 							type="text" id="prod_name" class="form-control"
-							ng-model="model_productName" required="required" value="prod.prodName">
+							ng-model="modal_productName" required="required" value="prod.prodName">
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="prod_price">Price</label>
 						<div class="input-group">
 							<span class="input-group-addon">$</span> <input type="text"
-								class="form-control" ng-model="model_productPrice" value="prod.price"> <span
+								class="form-control" ng-model="modal_productPrice" value="prod.price"> <span
 								class="input-group-addon">.00</span>
 						</div>
-					</div>	
+					</div>
+					<div class="control-group">
+						<select class="form-control" ng-model="modal_selectedCurrency" ng-options="currency.value as currency.label for currency in prodCurrencies">						
+						</select>
+					</div>
 					<div class="control-group">
 						<label class="control-label" for="prod_description">Description</label>
-						<textarea id="prod_description" class="form-control" ng-model="model_productDescription" cols="70" rows="3">{{prod.description}}</textarea>
+						<textarea id="prod_description" class="form-control" ng-model="modal_productDescription" cols="70" rows="3">{{prod.description}}</textarea>
 					</div>
+					
 					<div class="control-group" style="margin-top: 10px">
 						<div class="input-group">
-							<span class="input-group-addon"> <input type="checkbox" ng-model="model_productStock">
+							<span class="input-group-addon"> <input type="checkbox" ng-model="modal_productStock">
 							</span> 
 							<span class="form-control no-cursor">Stock</span>
 						</div>
@@ -44,7 +49,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
-      <button type="button" class="btn btn-primary" ng-click="ok(model_productBrand, model_productName, model_productDescription, model_productPrice, model_productStock)">Edit product</button>
+      <button type="button" class="btn btn-primary" ng-click="ok(modal_productBrand, modal_productName, modal_productDescription, modal_productPrice, modal_productStock, modal_selectedCurrency)">Edit product</button>
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

@@ -11,5 +11,21 @@ productApp.directive('ngConfirmClick', [ function() {
 			});
 		}
 	};
-} ]);
+}]);
+
+
+productApp.directive('zippy', function() {
+	return {
+		restrict: "E",
+		transclude: true,
+		replace: true,
+		scope: { 
+			name: "@"
+		},
+		template: "<div>{{name}}<div ng-transclude></div></div>",
+		link: function(scope, element, attrs) {
+			console.log(scope.name);
+		}
+	}
+});
 

@@ -8,6 +8,7 @@ public class Product {
 	private String description;
 	private String stock;
 	private String price;
+	private String currency;
 	
 	public Integer getId() {
 		return id;
@@ -44,5 +45,12 @@ public class Product {
 	}
 	public void setPrice(String price) {
 		this.price = price;
-	}		
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+	
 }

@@ -2,6 +2,9 @@
 	<div class="well well-md" style="border: none !important">
 		<div class="row">
 			<div class="col-lg-8">
+				<zippy name="{{name}}">
+					<div class="another">dasdasdas</div>
+				</zippy>
 			</div>
 			<!-- /.col-lg-6 -->
 			<div class="col-lg-4">
@@ -35,7 +38,7 @@
 				<td>{{prod.prodName}}</td>
 				<td>{{prod.description}}</td>
 				<td ng-style="{color: prod.stock_color}">{{prod.stock}}</td>
-				<td>{{prod.price}} AR$</td>
+				<td>{{prod.price}} {{prod.currency}}</td>
 				<td ng-controller="ModalDemoCtrl">					
 					<div class="btn-group" role="toolbar">	
 						<div class="btn btn-default" ng-click="open(prod.id)"><span title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
@@ -80,7 +83,6 @@
 							class="input-group-addon pull-center">.00</span>
 					</div>
 				</div>
-
 			</div>
 			<!-- Row 2 -->
 			<div class="col-md-3 col-md-5" style="margin-left: 20px">
@@ -94,6 +96,10 @@
 						</span> 
 						<span class="form-control no-cursor">Stock</span>
 					</div>
+				</div>
+				<div class="control-group" style="margin-top: 5px">
+					<select class="form-control" ng-model="selectedCurrency" ng-options="currency.value as currency.label for currency in prodCurrencies">						
+					</select>
 				</div>
 				<!-- Button -->
 				<div class="control-group pull-right" style="margin-top: 50px">

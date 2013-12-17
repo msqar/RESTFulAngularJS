@@ -2,6 +2,19 @@ var productApp = angular.module('productApp', ['ngRoute', 'LocalStorageModule', 
 
 productApp.factory('productFactory', function($http, localStorageService) {
 	var factory = {};
+	var prodCurrencies = [
+	                     	{
+	                     		value: "USD",
+	                     		label: "USD"
+	                     	},{
+	                     		value: "ARS",
+	                     		label: "ARS"
+	                     	},{
+	                     		value: "GBP",
+	                     		label: "GBP"
+	                     	}];
+	
+	localStorageService.add('productCurrency', prodCurrencies);	
 	
 	factory.getAllProducts = function(callbackSuccess, callbackError) {
 		$http({
@@ -12,7 +25,7 @@ productApp.factory('productFactory', function($http, localStorageService) {
 		.error(callbackError);
 	}
 	
-	factory.addSimpleProduct = function(productBrand, productName, prodDescription, productStock, productPrice, callbackSuccess, callbackError) {
+	factory.addSimpleProduct = function(productBrand, productName, prodDescription, productStock, productPrice, productCurrency, callbackSuccess, callbackError) {
 		
 		if(productName !== '') {
 			var postData = {
@@ -20,7 +33,8 @@ productApp.factory('productFactory', function($http, localStorageService) {
 					description: prodDescription,
 					prodBrand: productBrand,
 					stock: productStock,
-					price: productPrice
+					price: productPrice,
+					currency: productCurrency
 			};
 			
 			$http({
