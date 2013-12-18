@@ -95,6 +95,7 @@ public class MessageRestService {
 		Product aProd = gson.fromJson(jsonProduct, Product.class);
 		ProductManager manager = new ProductManager();
 		System.out.println("The product with id: " + aProd.getId() + " will be updated");
+		System.out.println(aProd.toString());
 		manager.updateProductById(aProd);	
 		
 		String json = "{ \"response\" : \"Product has been successfully updated.\"}";

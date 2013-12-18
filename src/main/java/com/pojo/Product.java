@@ -53,4 +53,15 @@ public class Product {
 		this.currency = currency;
 	}
 	
+	@Override
+	public String toString() {
+		return "**************** PRODUCT ****************** \n" +
+				"Product Brand: " + this.getProdBrand() + " \n" +
+			   "Product Name: " + this.getProdName() + " \n" +
+			   "Description: " + this.getDescription() + " \n" +
+			   "Stock: " + this.getStock() + " \n" + 
+			   "Price: " + this.getPrice() + " \n" +
+			   "Currency: " + this.getCurrency();
+	}
+	
 }

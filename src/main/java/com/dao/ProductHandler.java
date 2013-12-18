@@ -16,14 +16,22 @@ public class ProductHandler {
 	private static String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id = ?";
 	private static String UPDATE_PRODUCT_BY_ID = "UPDATE products SET prod_brand = ?, prod_name = ?, description = ?, stock = ?, price = ?, currency = ? WHERE id = ?";
 	
+	/**
+	 * This method returns all the products from the DB
+	 * @param connection
+	 * @return
+	 * @throws SQLException
+	 */
+	
 	public ArrayList<Product> getAllProducts(Connection connection) throws SQLException {
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		ArrayList<Product> productList = new ArrayList<Product>();
 		try {
 			ps = connection
 					.prepareStatement(QUERY_ALL_PRODUCTS);
 			
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while(rs.next()) {
 				Product prod = new Product();
 				prod.setId(Integer.valueOf(rs.getString("id")));
@@ -38,12 +46,20 @@ public class ProductHandler {
 			}
 			
 		}finally {
-			closeConnection(connection);
 			closeStatement(ps);
+			closeResultSet(rs);
+			closeConnection(connection);			
 		}
 		
 		return productList;		
 	}
+	
+	/**
+	 * This method adds a new product in the database based on a product object
+	 * @param connection
+	 * @param prod
+	 * @throws SQLException
+	 */
 
 	public void addNewProduct(Connection connection, Product prod) throws SQLException {
 		PreparedStatement ps = null;
@@ -66,6 +82,13 @@ public class ProductHandler {
 		}
 		
 	}
+	
+	/**
+	 * This method removes an object based on the product ID
+	 * @param connection
+	 * @param id
+	 * @throws SQLException
+	 */
 
 	public void removeProdById(Connection connection, String id) throws SQLException {
 		PreparedStatement ps = null;
@@ -82,17 +105,26 @@ public class ProductHandler {
 			closeStatement(ps);
 		}
 	}
+	
+	/**
+	 * This method retrieves a product from the DB based on its ID
+	 * @param connection
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 
 	public Product getProdById(Connection connection, String id) throws SQLException {
 		Product aProd = new Product();
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		try {
 			ps = connection
 					.prepareStatement(GET_PRODUCT_BY_ID);
 			
 			ps.setInt(1,Integer.valueOf(id));
 			
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			if(rs != null && rs.next()) {
 				aProd.setId(rs.getInt("id"));
@@ -105,12 +137,20 @@ public class ProductHandler {
 			}
 						
 		}finally {
-			closeConnection(connection);
 			closeStatement(ps);
+			closeResultSet(rs);
+			closeConnection(connection);
 		}
 		
 		return aProd;
 	}
+	
+	/**
+	 * This method updates a product in the DB
+	 * @param connection
+	 * @param aProd
+	 * @throws SQLException
+	 */
 
 	public void updateProdById(Connection connection, Product aProd) throws SQLException {
 		PreparedStatement ps = null;
@@ -124,8 +164,8 @@ public class ProductHandler {
 			ps.setString(3, aProd.getDescription());
 			ps.setString(4, aProd.getStock());
 			ps.setDouble(5, Double.valueOf(aProd.getPrice()));
-			ps.setInt(6, aProd.getId());
-			ps.setString(7, aProd.getCurrency());
+			ps.setString(6, aProd.getCurrency());
+			ps.setInt(7, aProd.getId());
 			
 			ps.execute();			
 		
@@ -138,6 +178,12 @@ public class ProductHandler {
 	private void closeStatement(PreparedStatement ps) throws SQLException{
 		if(ps != null) {
 			ps.close();
+		}		
+	}	
+
+	private void closeResultSet(ResultSet rs) throws SQLException {
+		if(rs != null) {
+			rs.close();
 		}		
 	}
 
