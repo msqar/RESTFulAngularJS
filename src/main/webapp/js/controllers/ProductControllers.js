@@ -11,7 +11,6 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flas
 	$scope.prodList = {};
 	$scope.alert = {};
 	$scope.prodCurrencies = localStorageService.get('productCurrency');
-	$scope.name = 'this is a test';
 		
 	var callProds = function() {
 		productFactory.getAllProducts(function successCallBack(data){

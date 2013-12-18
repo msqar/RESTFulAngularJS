@@ -8,10 +8,10 @@ public class DbConnection {
 
 	public Connection getConnection() throws Exception {
 		try {
-			String connectionURL = "jdbc:mysql://localhost:3306/db_dev";
+			String connectionURL = "jdbc:mysql://localhost:3306/fafa";
 			Connection connection = null;
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connection = DriverManager.getConnection(connectionURL, "root", "root");
+			connection = DriverManager.getConnection(connectionURL, "root", "");
 			return connection;
 		} catch (SQLException e) {
 			throw e;

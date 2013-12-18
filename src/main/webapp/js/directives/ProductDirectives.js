@@ -29,3 +29,29 @@ productApp.directive('zippy', function() {
 	}
 });
 
+productApp.directive('timer', function($interval) {
+	return {
+		restrict : 'E',
+		scope : {
+			interval : "=",
+		},
+		template : '<div>{{hour}} hours, {{minutes}} minutes and {{seconds}} seconds</div>',
+		link : function(scope, element, attrs) {
+			scope.seconds = 0;
+			scope.minutes = 0;
+			scope.hour = 0;
+			$interval(function() {
+				if (scope.seconds === 59) {
+					scope.minutes++;
+					scope.seconds = 0;
+				}
+				if (scope.minutes === 59) {
+					scope.hour++;
+					scope.minutes = 0;
+					scope.seconds = 0;
+				}
+				scope.seconds++;
+			}, attrs.interval);
+		}
+	}
+});

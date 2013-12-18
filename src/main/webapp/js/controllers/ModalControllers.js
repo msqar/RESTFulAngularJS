@@ -32,9 +32,9 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
    }, function errorCallback(data, status) {
       alert("An error occurred retrieving product. Please refresh the page & try again.");
    });
-  $scope.ok = function (modal_productBrand, modal_productName, modal_productDescription, modal_productPrice, modal_productStock, modal_productCurrency) {
+  $scope.ok = function (modal_productBrand, modal_productName, modal_productDescription, modal_productPrice, modal_selectedCurrency, modal_productStock, modal_productCurrency) {
 	  var prodStock = '';
-      if(model_productStock) {
+      if(modal_productStock) {
     	  prodStock = 'DISPONIBLE';
       }else{
     	  prodStock = 'SIN STOCK';
@@ -47,7 +47,7 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
 			  description : modal_productDescription,
 			  price : modal_productPrice,
 			  stock : prodStock,
-			  currency : modal_productCurrency
+			  currency : modal_selectedCurrency
 	  }
       
       productFactory.updateProductById(productObject, function successCallback(data) {

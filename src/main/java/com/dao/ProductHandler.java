@@ -10,17 +10,17 @@ import com.pojo.Product;
 
 public class ProductHandler {
 	
-	private static final String QUERY_ALL_PRODUCTS = "SELECT * FROM products";
-	private static final String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price, currency) VALUES (?,?,?,?,?,?)";
-	private static final String REMOVE_PRODUCT = "DELETE FROM products WHERE id = ?" ;
-	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id = ?";
-	private static final String UPDATE_PRODUCT_BY_ID = "UPDATE products SET prod_brand = ?, prod_name = ?, description = ?, stock = ?, price = ?, currency = ? WHERE id = ?";
+	private static String QUERY_ALL_PRODUCTS = "SELECT * FROM products";
+	private static String INSERT_NEW_PRODUCT = "INSERT INTO products (prod_brand, prod_name, description, stock, price, currency) VALUES (?,?,?,?,?,?)";
+	private static String REMOVE_PRODUCT = "DELETE FROM products WHERE id = ?" ;
+	private static String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id = ?";
+	private static String UPDATE_PRODUCT_BY_ID = "UPDATE products SET prod_brand = ?, prod_name = ?, description = ?, stock = ?, price = ?, currency = ? WHERE id = ?";
 	
-	public ArrayList<Product> getAllProducts(Connection connection) {
-		
+	public ArrayList<Product> getAllProducts(Connection connection) throws SQLException {
+		PreparedStatement ps = null;
 		ArrayList<Product> productList = new ArrayList<Product>();
 		try {
-			PreparedStatement ps = connection
+			ps = connection
 					.prepareStatement(QUERY_ALL_PRODUCTS);
 			
 			ResultSet rs = ps.executeQuery();
@@ -37,17 +37,18 @@ public class ProductHandler {
 				productList.add(prod);
 			}
 			
-		}catch(SQLException ex) {
-			ex.printStackTrace();
+		}finally {
+			closeConnection(connection);
+			closeStatement(ps);
 		}
 		
 		return productList;		
 	}
 
-	public void addNewProduct(Connection connection, Product prod) {
-		
+	public void addNewProduct(Connection connection, Product prod) throws SQLException {
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = connection
+			ps = connection
 					.prepareStatement(INSERT_NEW_PRODUCT);
 			
 			ps.setString(1, prod.getProdBrand());
@@ -59,31 +60,34 @@ public class ProductHandler {
 			
 			ps.execute();
 						
-		}catch(SQLException ex) {
-			ex.printStackTrace();
+		}finally {
+			closeConnection(connection);
+			closeStatement(ps);
 		}
 		
 	}
 
-	public void removeProdById(Connection connection, String id) {
+	public void removeProdById(Connection connection, String id) throws SQLException {
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = connection
+			ps = connection
 					.prepareStatement(REMOVE_PRODUCT);
 			
 			ps.setInt(1,Integer.valueOf(id));
 			
 			ps.execute();
 						
-		}catch(SQLException ex) {
-			ex.printStackTrace();
-		}		
+		}finally {
+			closeConnection(connection);
+			closeStatement(ps);
+		}
 	}
 
-	public Product getProdById(Connection connection, String id) {
+	public Product getProdById(Connection connection, String id) throws SQLException {
 		Product aProd = new Product();
-		
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = connection
+			ps = connection
 					.prepareStatement(GET_PRODUCT_BY_ID);
 			
 			ps.setInt(1,Integer.valueOf(id));
@@ -100,16 +104,19 @@ public class ProductHandler {
 				aProd.setCurrency(rs.getString("currency"));
 			}
 						
-		}catch(SQLException ex) {
-			ex.printStackTrace();
-		}	
+		}finally {
+			closeConnection(connection);
+			closeStatement(ps);
+		}
 		
 		return aProd;
 	}
 
-	public void updateProdById(Connection connection, Product aProd) {
+	public void updateProdById(Connection connection, Product aProd) throws SQLException {
+		PreparedStatement ps = null;
+		
 		try {
-			PreparedStatement ps = connection
+			ps = connection
 					.prepareStatement(UPDATE_PRODUCT_BY_ID);
 
 			ps.setString(1, aProd.getProdBrand());
@@ -121,10 +128,23 @@ public class ProductHandler {
 			ps.setString(7, aProd.getCurrency());
 			
 			ps.execute();			
-						
-		}catch(SQLException ex) {
-			ex.printStackTrace();
-		}	
+		
+		}finally {
+			closeConnection(connection);
+			closeStatement(ps);
+		}
+	}
+
+	private void closeStatement(PreparedStatement ps) throws SQLException{
+		if(ps != null) {
+			ps.close();
+		}		
+	}
+
+	private void closeConnection(Connection connection) throws SQLException {
+		if(connection != null) {
+			connection.close();
+		}		
 	}
 	
 }
