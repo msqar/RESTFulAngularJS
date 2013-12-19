@@ -61,7 +61,7 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
 			  
 			  $modalInstance.dismiss('cancel');
 			  //re-render the whole page
-			  $route.reload();
+//			  $route.reload();
 		  }, function errorCallback(data, status) {
 			  alert(data + ' Failed with error ' + status); 
 		  });    

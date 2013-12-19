@@ -7,7 +7,7 @@ productApp.config(function($routeProvider) {
 		.otherwise({redirectTo: '/'});
 });
 
-productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flash, localStorageService) {
+productApp.controller('prodCtrl', function($scope,  $modal, productFactory, $interval, flash, localStorageService) {
 	$scope.prodList = {};
 	$scope.alert = {};
 	$scope.prodCurrencies = localStorageService.get('productCurrency');
@@ -31,6 +31,10 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, flas
 	}	
 	
 	callProds();
+	
+	$interval(function() {
+		callProds();
+	}, 5000);
 	
 	$scope.addNewProduct = function() {
 		var productBrand = $scope.productBrand;
