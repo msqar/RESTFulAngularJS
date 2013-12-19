@@ -47,6 +47,7 @@
 	</table>
 	
 	<div flash-alert active-class="in alert" class="fade">
+		<button type="button" class="close" ng-click="hide()">&times;</button>
 	    <strong class="alert-heading">{{alert.heading}}</strong>
 	    <span class="alert-message">{{flash.message}}</span>
 	</div>
@@ -55,7 +56,7 @@
 		<i class="glyphicon glyphicon-plus"></i> Add Product
 	</button>
 
-	<form class="form-horizontal" ng-show="show">
+	<form name="addProdForm" class="form-horizontal" ng-show="show">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>Add a new product<span ng-click="show = !show" title="Close" class="glyphicon glyphicon-remove pull-right btn-cursor"></span></legend>
@@ -63,29 +64,28 @@
 			<!-- Row 1 -->
 			<div class="col-md-3 col-md-2 col-centered">
 				<div class="control-group">
-					<label class="control-label" for="prod_brand">Product Brand</label>
+					<label class="control-label" for="prod_brand">Product Brand <span class="required_field">*</span></label>
 					<input type="text" id="prod_brand" class="form-control"
 						ng-model="productBrand" required="required">
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="prod_name">Product Type</label> <input
-						type="text" id="prod_name" class="form-control"
-						ng-model="productName" required="required">
+					<label class="control-label" for="prod_name">Product Type <span class="required_field">*</span></label> 
+					<input type="text" id="prod_name" class="form-control" ng-model="productName" required="required">
 				</div>
 				<div class="control-group input-small">
 					<label class="control-label" for="prod_price">Price</label>
 					<div class="input-group">
-						<span class="input-group-addon">$</span> <input type="text"
-							class="form-control" ng-model="productPrice"> <span
-							class="input-group-addon pull-center">.00</span>
+						<span class="input-group-addon">$</span> 
+						<input is-number class="form-control" ng-model="productPrice"> 
+						<span class="input-group-addon pull-center">.00</span>
 					</div>
 				</div>
 			</div>
 			<!-- Row 2 -->
 			<div class="col-md-3 col-md-5" style="margin-left: 20px">
 				<div class="control-group">
-					<label class="control-label" for="prod_description">Description</label>
-					<textarea id="prod_description" class="form-control" ng-model="productDescription" cols="70" rows="3"></textarea>
+					<label class="control-label" for="prod_description">Description <span class="required_field">*</span></label>
+					<textarea id="prod_description" class="form-control" ng-model="productDescription" cols="70" rows="3" required="required"></textarea>
 				</div>
 				<div class="control-group" style="margin-top: 10px">
 					<div class="input-group">
@@ -99,10 +99,10 @@
 					</select>
 				</div>
 				<!-- Button -->
-				<div class="control-group pull-right" style="margin-top: 50px">
+				<div class="control-group pull-right" style="margin-top: 20px">
 					<label class="control-label" for="add_product_btn"></label>
 					<div class="controls">
-						<button id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()" class="btn btn-success">
+						<button ng-disabled="addProdForm.$invalid" id="add_product_btn" name="add_product_btn" ng-click="addNewProduct()" class="btn btn-success">
 							<i class="glyphicon glyphicon-plus"></i> Add product!
 						</button>
 					</div>

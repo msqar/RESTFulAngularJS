@@ -24,15 +24,13 @@ public class ProductManager {
 		return list;
 	}
 
-	public void addNewProduct(Product prod) {
-		try {
-			DbConnection db = new DbConnection();
-			Connection connection = db.getConnection();
-			ProductHandler handler = new ProductHandler();
-			handler.addNewProduct(connection, prod);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}		
+	public void addNewProduct(Product prod) throws Exception {
+		
+		DbConnection db = new DbConnection();
+		Connection connection = db.getConnection();
+		ProductHandler handler = new ProductHandler();
+		handler.addNewProduct(connection, prod);
+			
 	}
 
 	public void removeProdById(String id) {

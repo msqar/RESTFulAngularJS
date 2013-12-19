@@ -11,6 +11,10 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, $int
 	$scope.prodList = {};
 	$scope.alert = {};
 	$scope.prodCurrencies = localStorageService.get('productCurrency');
+	$scope.productPrice = 1;
+	$scope.selectedCurrency = $scope.prodCurrencies[0].value;
+	
+	console.log($scope.prodCurrencies);
 		
 	var callProds = function() {
 		productFactory.getAllProducts(function successCallBack(data){
@@ -61,7 +65,7 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, $int
 				$scope.alert = {
 						heading: "Error!"
 					}
-				flash.error = data + ' with status ' + status;
+				flash.error = data.response + ' Reason: ' + status;
 			});
 		}else{
 			$scope.errorAlert = true;

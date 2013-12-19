@@ -16,9 +16,13 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.model.ProductManager;
 import com.pojo.Product;
+import com.utils.CodeUtils;
 
 @Path("/message")
 public class MessageRestService {
+	
+	private String jsonResponse = null;
+	private Integer status = null;
 
 	@GET
 	@Path("/{param}")
@@ -49,15 +53,22 @@ public class MessageRestService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addNewProduct(String jsonRequest) {
 		
-		Gson gson = new Gson();
-		Product prod = gson.fromJson(jsonRequest, Product.class);
+		try {
+			Gson gson = new Gson();
+			Product prod = gson.fromJson(jsonRequest, Product.class);
+			
+			ProductManager manager = new ProductManager();
+			System.out.println("This is the product being added: " + prod.getProdName() + " : " + prod.getDescription());
+			manager.addNewProduct(prod);
+			
+			jsonResponse = "{ \"response\" : \"Product has been successfully saved.\"}";
+			status = CodeUtils.STATUS_CODE_OK;
+		}catch(Exception ex) {
+			jsonResponse = "{ \"response\" : \"Error while trying to add a product. \"}";
+			status = CodeUtils.STATUS_CODE_INTERNAL_SERVER_ERROR;
+		}		
 		
-		ProductManager manager = new ProductManager();
-		System.out.println("This is the product being added: " + prod.getProdName() + " : " + prod.getDescription());
-		manager.addNewProduct(prod);
-		String json = "{ \"response\" : \"Product has been successfully saved.\"}";
-		
-		return Response.status(200).entity(json).build();
+		return Response.status(status).entity(jsonResponse).build();
 	}
 	
 	@DELETE
@@ -91,15 +102,22 @@ public class MessageRestService {
 	@Path("/updateProductById")
 	public Response updateProductById(String jsonProduct) {
 		
-		Gson gson = new Gson();
-		Product aProd = gson.fromJson(jsonProduct, Product.class);
-		ProductManager manager = new ProductManager();
-		System.out.println("The product with id: " + aProd.getId() + " will be updated");
-		System.out.println(aProd.toString());
-		manager.updateProductById(aProd);	
+		try {
+			Gson gson = new Gson();
+			Product aProd = gson.fromJson(jsonProduct, Product.class);
+			ProductManager manager = new ProductManager();
+			System.out.println("The product with id: " + aProd.getId() + " will be updated");
+			System.out.println(aProd.toString());
+			manager.updateProductById(aProd);	
+			
+			jsonResponse = "{ \"response\" : \"Product has been successfully updated.\"}";
+			status = CodeUtils.STATUS_CODE_OK;
+		}catch(Exception ex) {
+			jsonResponse = "{ \"response\" : \"Error while trying to update.\"}";
+			status = CodeUtils.STATUS_CODE_INTERNAL_SERVER_ERROR;
+		}		
 		
-		String json = "{ \"response\" : \"Product has been successfully updated.\"}";
-		return Response.status(200).entity(json).build();
+		return Response.status(status).entity(jsonResponse).build();
 	}
 
 }
