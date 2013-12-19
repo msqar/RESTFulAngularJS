@@ -14,7 +14,7 @@ productApp.controller('ModalDemoCtrl', function ($scope, $modal) {
   };
 });
 
-productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInstance, productFactory, prodId, localStorageService) {	
+productApp.controller('ModalInstanceCtrl', function ($scope, $route, $rootScope, $modalInstance, productFactory, prodId, localStorageService) {	
 
   $scope.prodCurrencies = localStorageService.get('productCurrency');	
 	
@@ -25,6 +25,7 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
       $scope.modal_productDescription = data.description;
       $scope.modal_productPrice = data.price;
       $scope.modal_selectedCurrency = data.currency;
+      
       if(data.stock === 'DISPONIBLE') {
     	  $scope.modal_productStock = true;
       }
@@ -60,10 +61,12 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $modalInsta
 		  productFactory.updateProductById(productObject, function successCallback(data) {
 			  
 			  $modalInstance.dismiss('cancel');
+			  
+			  $rootScope.$broadcast('UPDATE_PRODUCT_RESPONSE_SUCCESS', data);
 			  //re-render the whole page
 //			  $route.reload();
 		  }, function errorCallback(data, status) {
-			  alert(data + ' Failed with error ' + status); 
+			  $rootScope.$broadcast('UPDATE_PRODUCT_RESPONSE_ERROR', data);
 		  });    
 		  
 	  });  

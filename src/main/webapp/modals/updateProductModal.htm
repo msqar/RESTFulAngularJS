@@ -5,22 +5,21 @@
       <h4 class="modal-title">Modify a Product</h4>
     </div>
     <div class="modal-body">
-		<form class="form-horizontal">
+		<form name="modalForm" class="form-horizontal">
 			<fieldset>			
 				<!-- Row 1 -->
 				<div class="row">
 					<div class="col-md-6 col-centered">
 						<div class="control-group">
-							<label class="control-label" for="prod_brand">Product Brand</label>
+							<label class="control-label" for="prod_brand">Product Brand <span class="required_field">*</span></label>
 							<input type="text" id="prod_brand" class="form-control"
 								ng-model="modal_productBrand" required="required" value="prod.prodBrand">
 						</div>
 					</div>
 					<div class="col-md-6 col-centered">
 						<div class="control-group">
-							<label class="control-label" for="prod_name">Product Type</label> <input
-								type="text" id="prod_name" class="form-control"
-								ng-model="modal_productName" required="required" value="prod.prodName">
+							<label class="control-label" for="prod_name">Product Type <span class="required_field">*</span></label> 
+							<input type="text" id="prod_name" class="form-control" ng-model="modal_productName" required="required" value="prod.prodName">
 						</div>
 					</div>
 				</div>
@@ -29,9 +28,9 @@
 						<div class="control-group">
 							<label class="control-label" for="prod_price">Price</label>
 							<div class="input-group">
-								<span class="input-group-addon">$</span> <input type="text"
-									class="form-control" ng-model="modal_productPrice" value="prod.price"> <span
-									class="input-group-addon">.00</span>
+								<span class="input-group-addon">$</span>
+								<input is-number class="form-control" ng-model="modal_productPrice" value="prod.price"> 
+								<span class="input-group-addon">.00</span>
 							</div>
 						</div>
 					</div>
@@ -47,7 +46,7 @@
 					<div class="col-md-12 col-centered">
 						<div class="control-group">
 							<label class="control-label" for="prod_description">Description</label>
-							<textarea id="prod_description" class="form-control" ng-model="modal_productDescription" cols="70" rows="3">{{prod.description}}</textarea>
+							<textarea id="prod_description" class="form-control" ng-model="modal_productDescription" cols="70" rows="3" required="required">{{prod.description}}</textarea>
 						</div>
 					</div>
 				</div>	
@@ -67,7 +66,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
-      <button type="button" class="btn btn-primary" ng-click="ok(modal_productBrand, modal_productName, modal_productDescription, modal_productPrice, modal_productStock, modal_selectedCurrency)">Edit product</button>
+      <button ng-disabled="modalForm.$invalid" type="button" class="btn btn-primary" ng-click="ok()">Edit product</button>
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

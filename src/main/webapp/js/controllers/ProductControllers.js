@@ -7,15 +7,16 @@ productApp.config(function($routeProvider) {
 		.otherwise({redirectTo: '/'});
 });
 
-productApp.controller('prodCtrl', function($scope,  $modal, productFactory, $interval, flash, localStorageService) {
+productApp.controller('prodCtrl', function($scope, $rootScope, $modal, productFactory, $interval, flash, localStorageService) {
+	
+	// Initializing variables
+	
 	$scope.prodList = {};
 	$scope.alert = {};
 	$scope.prodCurrencies = localStorageService.get('productCurrency');
 	$scope.productPrice = 1;
 	$scope.selectedCurrency = $scope.prodCurrencies[0].value;
 	
-	console.log($scope.prodCurrencies);
-		
 	var callProds = function() {
 		productFactory.getAllProducts(function successCallBack(data){
 			$scope.prodList = data;
@@ -52,25 +53,21 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, $int
 			stock = 'DISPONIBLE';
 		}else{
 			stock = 'SIN STOCK';
-		}
-		
-		if(typeof (productName) !== 'undefined' || productName !== null || typeof (productBrand) !== 'undefined' || productBrand !== null) {
-			productFactory.addSimpleProduct(productBrand, productName, description, stock, price, currency, function callbackSuccess(data) {
-				$scope.alert = {
-					heading: "Success!"
+		}		
+	
+		productFactory.addSimpleProduct(productBrand, productName, description, stock, price, currency, function callbackSuccess(data) {
+			$scope.alert = {
+				heading: "Success!"
+			}
+			flash.success = data.response;
+			callProds();
+		}, function errorCallback(data, status) {
+			$scope.alert = {
+					heading: "Error!"
 				}
-				flash.success = data.response;
-				callProds();
-			}, function errorCallback(data, status) {
-				$scope.alert = {
-						heading: "Error!"
-					}
-				flash.error = data.response + ' Reason: ' + status;
-			});
-		}else{
-			$scope.errorAlert = true;
-			$scope.alertErrorData = 'Product name and brand can\'t be empty!';
-		}
+			flash.error = data.response + ' Reason: ' + status;
+		});
+		
 	}
 	
 	$scope.removeProduct = function(id) {
@@ -86,7 +83,23 @@ productApp.controller('prodCtrl', function($scope,  $modal, productFactory, $int
 				}
 			flash.error = data + ' with status ' + status;
 		});
-	}
+	}	
+	
+	/* Listening to modal broadcasting on update events*/
+	$rootScope.$on('UPDATE_PRODUCT_RESPONSE_SUCCESS', function(event, data) {
+		$scope.alert = {
+			heading: "Success!"
+		}
+		flash.success = data.response;
+	});
+	
+	$rootScope.$on('UPDATE_PRODUCT_RESPONSE_ERROR', function(event, data) {
+		$scope.alert = {
+			heading: "Error!"
+		}
+		flash.success = data.response;
+	});
+	/* End of broadcasting events */
 	
 	this.$inject = ['flash'];
 });
