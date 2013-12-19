@@ -76,7 +76,7 @@ productApp.directive('isNumber', function () {
                 	}else if(attrs.ngModel === 'modal_productPrice') {
                 		if(oldValue === undefined) {
                 			console.log(scope)
-                			oldValue = 
+                			oldValue = '1';
                 		}
                 		scope.modal_productPrice = oldValue;
                 	}
