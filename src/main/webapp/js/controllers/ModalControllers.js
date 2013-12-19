@@ -56,8 +56,6 @@ productApp.controller('ModalInstanceCtrl', function ($scope, $route, $rootScope,
 				  currency : newValues[5]
 		  }
 		  
-		  console.log(productObject)
-		  
 		  productFactory.updateProductById(productObject, function successCallback(data) {
 			  
 			  $modalInstance.dismiss('cancel');

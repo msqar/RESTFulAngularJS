@@ -29,6 +29,11 @@ productApp.directive('zippy', function() {
 	}
 });
 
+/**
+ * This directive creates a timer
+ * @author mmarzull
+ */
+
 productApp.directive('timer', function($interval) {
 	return {
 		restrict : 'E',
@@ -59,14 +64,22 @@ productApp.directive('timer', function($interval) {
 productApp.directive('isNumber', function () {
 	return {
 		require: 'ngModel',
-		link: function (scope) {	
-			scope.$watch('productPrice', function(newValue,oldValue) {
-                var arr = String(newValue).split("");
+		link: function (scope, elem, attrs) {
+			scope.$watch(attrs.ngModel, function(newValue,oldValue) {
+				var arr = String(newValue).split("");
                 if (arr.length === 0) return;
                 if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.' )) return;
                 if (arr.length === 2 && newValue === '-.') return;
                 if (isNaN(newValue)) {
-                    scope.productPrice = oldValue;
+                	if(attrs.ngModel === 'productPrice') {
+                		scope.productPrice = oldValue;
+                	}else if(attrs.ngModel === 'modal_productPrice') {
+                		if(oldValue === undefined) {
+                			console.log(scope)
+                			oldValue = 
+                		}
+                		scope.modal_productPrice = oldValue;
+                	}
                 }
             });
 		}

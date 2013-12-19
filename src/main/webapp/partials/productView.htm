@@ -35,7 +35,7 @@
 				<td>{{prod.prodName}}</td>
 				<td>{{prod.description}}</td>
 				<td ng-style="{color: prod.stock_color}">{{prod.stock}}</td>
-				<td>{{prod.price}} {{prod.currency}}</td>
+				<td>{{prod.price}}.00 {{prod.currency}}</td>
 				<td ng-controller="ModalDemoCtrl">					
 					<div class="btn-group" role="toolbar">	
 						<div class="btn btn-default" ng-click="open(prod.id)"><span title="Edit" class="glyphicon glyphicon-pencil btn-cursor"></span></div>				
@@ -76,7 +76,7 @@
 					<label class="control-label" for="prod_price">Price</label>
 					<div class="input-group">
 						<span class="input-group-addon">$</span> 
-						<input is-number class="form-control" ng-model="productPrice"> 
+						<input is-number="{{productPrice}}" class="form-control" ng-model="productPrice"> 
 						<span class="input-group-addon pull-center">.00</span>
 					</div>
 				</div>

@@ -39,7 +39,7 @@ public class ProductHandler {
 				prod.setProdBrand(rs.getString("prod_brand"));
 				prod.setDescription(rs.getString("description"));
 				prod.setStock(rs.getString("stock"));
-				prod.setPrice(String.valueOf(rs.getDouble("price")));
+				prod.setPrice(String.valueOf(rs.getInt("price")));
 				prod.setCurrency(rs.getString("currency"));
 				
 				productList.add(prod);
@@ -71,7 +71,7 @@ public class ProductHandler {
 			ps.setString(2, prod.getProdName());
 			ps.setString(3, prod.getDescription());
 			ps.setString(4, prod.getStock());
-			ps.setDouble(5, Double.valueOf(prod.getPrice()));
+			ps.setDouble(5, Integer.valueOf(prod.getPrice()));
 			ps.setString(6, prod.getCurrency());
 			
 			ps.execute();
@@ -132,7 +132,7 @@ public class ProductHandler {
 				aProd.setProdName(rs.getString("prod_name"));
 				aProd.setDescription(rs.getString("description"));
 				aProd.setStock(rs.getString("stock"));
-				aProd.setPrice(String.valueOf(rs.getDouble("price")));
+				aProd.setPrice(String.valueOf(rs.getInt("price")));
 				aProd.setCurrency(rs.getString("currency"));
 			}
 						
@@ -163,7 +163,7 @@ public class ProductHandler {
 			ps.setString(2, aProd.getProdName());
 			ps.setString(3, aProd.getDescription());
 			ps.setString(4, aProd.getStock());
-			ps.setDouble(5, Double.valueOf(aProd.getPrice()));
+			ps.setDouble(5, Integer.valueOf(aProd.getPrice()));
 			ps.setString(6, aProd.getCurrency());
 			ps.setInt(7, aProd.getId());
 			
